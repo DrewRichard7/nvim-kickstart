@@ -67,7 +67,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'move block down' }) -- mo
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'move block up' }) -- moves highlighted code up
 
 -- pipe operator |>
-vim.keymap.set('i', '<C-m>', '|>', { desc = 'insert pip operator' })
+vim.keymap.set('i', '<C-m>', '|>', { desc = 'insert pipe operator' })
 
 P = vim.print
 
@@ -287,7 +287,7 @@ wk.add({
     { '<m-->', ' <- ', desc = 'assign' },
     { '<m-I>', insert_py_chunk, desc = 'python code chunk' },
     { '<m-i>', insert_r_chunk, desc = 'r code chunk' },
-    { '<m-m>', ' |>', desc = 'pipe' },
+    -- { '<m-m>', ' |>', desc = 'pipe' }, -- currently have opt-m window sizing shortcut
   },
 }, { mode = 'i' })
 
