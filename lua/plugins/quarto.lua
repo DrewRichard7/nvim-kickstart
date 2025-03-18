@@ -9,8 +9,6 @@ return {
     lazy = true,
     dependencies = {
       -- for language features in code cells
-      -- configured in lua/plugins/lsp.lua and
-      -- added as a nvim-cmp source in lua/plugins/completion.lua
       'jmbuhr/otter.nvim',
     },
   },
