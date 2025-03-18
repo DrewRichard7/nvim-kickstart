@@ -7,6 +7,37 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Set default slime_cell_delimiter (fallback)
+vim.g.slime_cell_delimiter = '```' -- Or whatever you want as the default
+
+-- Filetype-specific slime_cell_delimiter settings
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    vim.g.slime_cell_delimiter = '\\s\\=#%%'
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'r',
+  callback = function()
+    vim.g.slime_cell_delimiter = "#' ---"
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'quarto',
+  callback = function()
+    vim.g.slime_cell_delimiter = '```'
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rmarkdown',
+  callback = function()
+    vim.g.slime_cell_delimiter = '```'
+  end,
+})
 -- [[ Setting options ]]
 require 'options'
 
