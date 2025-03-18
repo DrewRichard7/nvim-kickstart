@@ -57,7 +57,7 @@ return {
       return [a:text]
       end
       end
-      endfunctionB      ]]
+      endfunction      ]]
 
       vim.g.slime_target = 'neovim'
       vim.g.slime_no_mappings = true
