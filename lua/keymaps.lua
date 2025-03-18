@@ -6,7 +6,7 @@
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>fq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [F]ix[Q]uick list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -16,14 +16,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
@@ -253,9 +245,9 @@ local insert_py_chunk = function()
   insert_code_chunk 'python'
 end
 
--- require('which-key').add({
---   { '<cm-i>', insert_py_chunk, desc = 'python code chunk' },
---   { '<esc>', '<cmd>noh<cr>', desc = 'remove search highlight' },
---   { '<m-I>', insert_py_chunk, desc = 'python code chunk' },
---   { '<m-i>', insert_r_chunk, desc = 'r code chunk' },
--- }, { mode = 'n', silent = true })
+require('which-key').add({
+  { '<cm-i>', insert_py_chunk, desc = 'python code chunk' },
+  { '<esc>', '<cmd>noh<cr>', desc = 'remove search highlight' },
+  { '<m-I>', insert_py_chunk, desc = 'python code chunk' },
+  { '<m-i>', insert_r_chunk, desc = 'r code chunk' },
+}, { mode = 'n', silent = true })
