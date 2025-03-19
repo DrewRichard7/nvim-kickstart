@@ -41,12 +41,12 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- [[ UI Elements with NVChad chadrc.lua ]]
 -- put this in your main init.lua file ( before lazy setup )
-vim.g.base46_cache = vim.fn.stdpath 'data' .. '/base46_cache/'
+-- vim.g.base46_cache = vim.fn.stdpath 'data' .. '/base46_cache/'
 
 -- tell Lua where to look for your custom modules by modifying the package.path within Neovim configuration. Add the directory containing chadrc.lua file to package.path.
 -- Add this to your Neovim configuration (e.g., init.lua or init.vim)
-local home = os.getenv 'HOME'
-package.path = package.path .. ';' .. home .. '/.config/nvim-kickstart/lua/plugins/?.lua'
+-- local home = os.getenv 'HOME'
+-- package.path = package.path .. ';' .. home .. '/.config/nvim-kickstart/lua/plugins/?.lua'
 
 -- [[ Setting options ]]
 require 'options'
@@ -60,8 +60,8 @@ require 'lazy-plugins'
 -- put this after lazy setup
 
 -- (method 1, For heavy lazyloaders)
-dofile(vim.g.base46_cache .. 'defaults')
-dofile(vim.g.base46_cache .. 'statusline')
+-- dofile(vim.g.base46_cache .. 'defaults')
+-- dofile(vim.g.base46_cache .. 'statusline')
 
 -- -- (method 2, for non lazyloaders) to load all highlights at once
 --  for _, v in ipairs(vim.fn.readdir(vim.g.base46_cache)) do

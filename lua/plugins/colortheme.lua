@@ -1,3 +1,5 @@
+-- if a telescope theme is selected with :Telescope themes, it will be loaded into the current-theme.lua file. Otherwise enable a theme here.
+
 return {
   {
     'catppuccin/nvim',
@@ -16,10 +18,10 @@ return {
       local border = '#547998'
 
       require('catppuccin').setup {
-        flavour = 'macchiato', -- latte, frappe, macchiato, mocha
+        flavour = 'mocha', -- latte, frappe, macchiato, mocha
         background = { -- :h background
           light = 'macchiato',
-          dark = 'macchiato',
+          dark = 'mocha',
         },
         transparent_background = true, -- disables setting the background color.
         show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
