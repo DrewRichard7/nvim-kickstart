@@ -17,4 +17,14 @@ return {
   {
     'nvchad/volt', -- optional, needed for theme switcher
   },
+
+  base46 = {
+    theme = 'onedark',
+    hl_add = {},
+    hl_override = {},
+    integrations = {},
+    changed_themes = {},
+    transparency = false,
+    theme_toggle = { 'onedark', 'one_light' },
+  },
 }
