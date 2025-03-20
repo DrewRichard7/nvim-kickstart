@@ -36,7 +36,7 @@ return {
         { '<leader>f', group = '[F]ind' },
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>G', group = '[G]it', mode = { 'n', 'v' } },
       },
     },
   },

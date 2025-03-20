@@ -292,7 +292,7 @@ wk.add({
     mode = { 'i' },
     { '<c-x><c-x>', '<c-x><c-o>', desc = 'omnifunc completion' },
     { '<cm-i>', insert_py_chunk, desc = 'python code chunk' },
-    { '<m-->', ' <- ', desc = 'assign' },
+    { '<C-->', ' <- ', desc = 'assign' },
     { '<m-I>', insert_py_chunk, desc = 'python code chunk' },
     { '<m-i>', insert_r_chunk, desc = 'r code chunk' },
     -- { '<m-m>', ' |>', desc = 'pipe' }, -- currently have opt-m window sizing shortcut
