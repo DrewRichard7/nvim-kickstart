@@ -19,15 +19,15 @@ return {
 
   {
     'neovim/nvim-lspconfig',
-    lazy = true, -- Add this line to lazy-load nvim-lspconfig
+    lazy = true,                                                                                                                              -- Add this line to lazy-load nvim-lspconfig
     ft = { 'quarto', 'lua', 'python', 'javascript', 'typescript', 'html', 'css', 'json', 'yaml', 'sh', 'bash', 'vim', 'julia', 'rust', 'r' }, -- Or list of filetypes for which you want LSP support
     -- Or, load only when specific commands are used:
     -- cmd = { "LspInfo", "Mason" },
     dependencies = {
-      { 'williamboman/mason.nvim', lazy = true }, -- Lazy-load mason.nvim too
-      { 'williamboman/mason-lspconfig.nvim', lazy = true }, -- Lazy load this as well
+      { 'williamboman/mason.nvim',                  lazy = true }, -- Lazy-load mason.nvim too
+      { 'williamboman/mason-lspconfig.nvim',        lazy = true }, -- Lazy load this as well
       { 'WhoIsSethDaniel/mason-tool-installer.nvim' },
-      { -- nice loading notifications
+      {                                                            -- nice loading notifications
         -- PERF: but can slow down startup
         'j-hui/fidget.nvim',
         enabled = false,
@@ -46,7 +46,7 @@ return {
           },
         },
         { 'Bilal2453/luvit-meta', lazy = true }, -- optional `vim.uv` typings
-        { -- optional completion source for require statements and module annotations
+        {                                        -- optional completion source for require statements and module annotations
           'hrsh7th/nvim-cmp',
           opts = function(_, opts)
             opts.sources = opts.sources or {}
@@ -85,11 +85,9 @@ return {
         },
       }
 
-      require('lspconfig').r_language_server.setup {
-        cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' },
-        filetypes = { 'r', 'rmd', 'quarto' },
-        log_level = 2,
-      }
+      -- NOTE: The two original r_language_server setup blocks are removed.
+      -- The consolidated block below replaces them.
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
@@ -132,9 +130,10 @@ return {
         debounce_text_changes = 150,
       }
 
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } })
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover,
+        { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } })
       vim.lsp.handlers['textDocument/signatureHelp'] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } })
+          vim.lsp.with(vim.lsp.handlers.signature_help, { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } })
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
@@ -145,12 +144,14 @@ return {
         -- gopls = {},
         pyright = {},
         rust_analyzer = {},
+        -- Note: r_language_server entry within the 'servers' table is still here,
+        -- but the main setup is done outside this table now.
         r_language_server = {
-          settings = {
-            lintr = {
-              delay = 2000,
-            },
-          },
+          -- settings = {
+          --   lintr = {
+          --     delay = 2000,
+          --   },
+          -- },
         },
 
         lua_ls = {
@@ -182,13 +183,25 @@ return {
         root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
       }
 
+      -- Consolidated r_language_server setup block:
       lspconfig.r_language_server.setup {
-        capabilities = capabilities,
-        flags = lsp_flags,
+        cmd = { 'R', '--no-echo', '-e', 'languageserver::run()' }, -- Command from Config B
+        filetypes = { 'r', 'rmd', 'quarto' },                      -- Filetypes from Config B
+        log_level = vim.lsp.protocol.MessageType.Warning,          -- Explicitly set log level (Warning=2)
+        capabilities = capabilities,                               -- Capabilities from Config B
+        flags = lsp_flags,                                         -- Flags from Config B
         settings = {
           r = {
             lsp = {
-              rich_documentation = false,
+              -- Choose whether you want rich documentation or not:
+              rich_documentation = true, -- Or false, your preference
+
+              -- Explicitly enable diagnostics and configure lintr:
+              diagnostics = true,
+              lint = {
+                linters = 'lintr::default_linters', -- Use default linters
+                delay = 1500,                       -- Adjust delay as needed
+              },
             },
           },
         },
@@ -365,7 +378,8 @@ return {
           },
         },
         root_dir = function(fname)
-          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or util.path.dirname(fname)
+          return util.root_pattern('.git', 'setup.py', 'setup.cfg', 'pyproject.toml', 'requirements.txt')(fname) or
+              util.path.dirname(fname)
         end,
       }
     end,
